@@ -6,16 +6,16 @@
 	"author": "mmarifat <mma.rifat66@gmail.com>",
 	"private": true,
 	"scripts": {
-		"dev": "quasar dev -p 1997",
+		"dev": "quasar dev",
 		"build": "quasar build"
 	},
 	"dependencies": {
+		"quasar": "^1.12.13",
 		"@quasar/extras": "^1.9.0",
 		"axios": "^0.19.2",
 		"core-js": "^3.6.5",
 		"moviedb": "^0.2.10",
 		"opensubtitles-api": "^5.1.2",
-		"quasar": "^1.12.13",
 		"vue-class-component": "^7.2.4",
 		"vue-i18n": "^8.18.2",
 		"vue-property-decorator": "^9.0.0"

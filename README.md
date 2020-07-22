@@ -6,10 +6,15 @@ A Subtitle Downloader App Using NodeJS
 ```bash
 yarn install
 ```
+## Set API KEY
+```bash
+Get from here [themoviedb](https://www.themoviedb.org/).
+Rename .env.example to .env
+```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev -p 1997
+quasar dev
 ```
 
 
