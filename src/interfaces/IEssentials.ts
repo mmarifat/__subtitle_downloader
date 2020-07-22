@@ -25,4 +25,17 @@ export interface IMovieSearchResult {
 	video?: boolean | any
 	vote_average?: number | any
 	vote_count?: number | any
+
+	imdb_id?: string
+	belongs_to_collection?: any
+	budget?: number | any
+	genres?: Array<any>
+	homepage?: string
+	production_companies?: Array<any>
+	production_countries?: Array<any>
+	spoken_languages?: Array<any>
+	status?: string
+	tagline?:string
+
+	
 }

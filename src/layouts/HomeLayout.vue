@@ -19,7 +19,7 @@
 			<q-list bordered>
 				<q-item clickable v-ripple :to="{name: 'aboutMe'}">
 					<q-item-section avatar>
-						<q-icon color="primary" name="perm_contact_calendar"/>
+						<q-icon :color="$colors.primary" name="perm_contact_calendar"/>
 					</q-item-section>
 					<q-item-section>About Me</q-item-section>
 				</q-item>
@@ -27,7 +27,7 @@
 		</q-drawer>
 
 		<q-page-container>
-			<router-view class="q-pt-md"/>
+			<router-view class="q-pt-md q-mt-md"/>
 		</q-page-container>
 
 		<!--<q-footer elevated class="bg-grey-8 text-white">

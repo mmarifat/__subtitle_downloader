@@ -20,7 +20,7 @@ module.exports = configure(function (/* ctx */) {
 		// --> boot files are part of "main.js"
 		// https://quasar.dev/quasar-cli/boot-files
 		boot: [
-
+			'custom',
 			'i18n',
 			'axios',
 		],
@@ -46,7 +46,7 @@ module.exports = configure(function (/* ctx */) {
 
 		// Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
 		build: {
-			vueRouterMode: 'hash', // available values: 'hash', 'history'
+			vueRouterMode: 'history', // available values: 'hash', 'history'
 
 			// transpile: false,
 
@@ -57,9 +57,10 @@ module.exports = configure(function (/* ctx */) {
 
 			// rtl: false, // https://quasar.dev/options/rtl-support
 			// preloadChunks: true,
-			// showProgress: false,
-			// gzip: true,
+			showProgress: false,
+			gzip: true,
 			// analyze: true,
+			env: {},
 
 			// Options below are automatically set depending on the env, set them if you want to override
 			// extractCSS: false,
@@ -71,8 +72,9 @@ module.exports = configure(function (/* ctx */) {
 
 		// Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
 		devServer: {
+			clientLogLevel: "silent",
 			https: false,
-			port: 8080,
+			port: 9090,
 			open: true // opens browser window automatically
 		},
 
@@ -80,20 +82,25 @@ module.exports = configure(function (/* ctx */) {
 		framework: {
 			iconSet: 'material-icons', // Quasar icon set
 			lang: 'en-us', // Quasar language pack
-			config: {},
-
 			// Possible values for "importStrategy":
 			// * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
 			// * 'all'  - Manually specify what to import
 			importStrategy: 'auto',
+			cssAddon: true,
+			components: [],
 
 			// Quasar plugins
-			plugins: []
+			plugins: [
+				'Notify', 'LoadingBar'
+			],
+			config: {
+				loadingBar: {size: '10px', position: 'top'}
+			},
 		},
 
 		// animations: 'all', // --- includes all animations
 		// https://quasar.dev/options/animations
-		animations: [],
+		animations: 'all',
 
 		// https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
 		ssr: {
@@ -145,6 +152,7 @@ module.exports = configure(function (/* ctx */) {
 		// Full list of options: https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
 		cordova: {
 			// noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
+			id: 'com.mmarifat.opensub'
 		},
 
 		// Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
@@ -172,7 +180,7 @@ module.exports = configure(function (/* ctx */) {
 			builder: {
 				// https://www.electron.build/configuration/configuration
 
-				appId: 'subtitle_downloader'
+				appId: 'opensub'
 			},
 
 			// More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

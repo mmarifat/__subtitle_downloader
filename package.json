@@ -22,6 +22,7 @@
 	},
 	"devDependencies": {
 		"@quasar/app": "^2.0.6",
+		"@quasar/quasar-app-extension-dotenv": "^1.0.5",
 		"@types/moviedb": "^0.0.29",
 		"@types/node": "^14.0.24"
 	},
