@@ -3,7 +3,11 @@
 		<q-card class="q-mt-lg" flat>
 			<q-card-section class="text-center">
 				<q-avatar size="150px" class="shadow-20">
-					<img src="images/me.jpg" alt="images/not_available.svg">
+					<q-img src="images/me.jpg" alt="images/not_available.svg">
+						<template v-slot:loading>
+							<q-spinner-tail :color="$colors.blue[10]"/>
+						</template>
+					</q-img>
 				</q-avatar>
 			</q-card-section>
 
