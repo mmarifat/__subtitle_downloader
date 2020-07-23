@@ -1,8 +1,8 @@
 {
 	"name": "subtitle_downloader",
 	"version": "0.0.1",
-	"description": "A Subtitle Downloader App Using NodeJS",
-	"productName": "Subtitle Downloader",
+	"description": "Subtitle Downloader App",
+	"productName": "MSUB",
 	"author": "mmarifat <mma.rifat66@gmail.com>",
 	"private": true,
 	"scripts": {

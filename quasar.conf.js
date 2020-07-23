@@ -34,7 +34,7 @@ module.exports = configure(function (/* ctx */) {
 		extras: [
 			// 'ionicons-v4',
 			// 'mdi-v5',
-			 'fontawesome-v5',
+			'fontawesome-v5',
 			// 'eva-icons',
 			// 'themify',
 			// 'line-awesome',
@@ -112,9 +112,9 @@ module.exports = configure(function (/* ctx */) {
 			workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
 			workboxOptions: {}, // only for GenerateSW
 			manifest: {
-				name: `Subtitle Downloader App`,
-				short_name: `Subtitle Downloader`,
-				description: `A Subtitle Downloader App Using NodeJS`,
+				name: `SUBTITLE DOWNLOADER`,
+				short_name: `MSUB`,
+				description: `Subtitle Downloader App`,
 				display: 'standalone',
 				orientation: 'portrait',
 				background_color: '#ffffff',
