@@ -38,8 +38,8 @@
 			</q-card>
 		</q-row>
 
-		<q-dialog v-model="showSelectMovieDialog" transition-show="slide-down" transition-hide="slide-up">
-			<q-card class="mma-card custom-background" v-if="movieSearchList.length">
+		<q-dialog v-model="showListDialog" transition-show="slide-down" transition-hide="slide-up">
+			<q-card class="mma-card custom-background" v-if="searchResultList.length">
 				<q-linear-progress :value="1" :color="$colors.primary"/>
 				<q-card-section class="row">
 					<q-col class="col-8 q-pl-sm">
@@ -52,12 +52,16 @@
 
 				<q-card-section class="q-pr-lg">
 					<q-row class="q-col-gutter-sm">
-						<q-col class="col-12" v-for="each in movieSearchList" :key="each.id+String(Math.random())">
+						<q-col class="col-12" v-for="each in searchResultList" :key="each.id+String(Math.random())">
 							<q-list bordered padding dense>
-								<q-item clickable @click="selectedMovie(each)">
+								<q-item clickable @click="selected(each)">
 									<q-item-section>
-										<q-item-label overline v-html="each.original_title" class="q-pb-sm"/>
-										<q-item-label caption v-html="'Release: '+$common.convertDate(each.release_date, 'DD MMM, YYYY')"/>
+										<q-item-label overline v-html="subtitleInfo.season.status ? each.original_name: each.original_title"
+										              class="q-pb-sm"/>
+										<q-item-label caption>
+											Release: {{$common.convertDate(subtitleInfo.season.status ?
+											each.first_air_date : each.release_date, 'DD MMM, YYYY') }}
+										</q-item-label>
 									</q-item-section>
 
 									<q-item-section side top>
@@ -78,7 +82,7 @@
 			<q-card v-else class="mma-card text-center">
 				<q-card-section class="bg-amber text-black text-overline">
 					<q-row>
-						<q-col class="col-8">
+						<q-col class="col-8 text-left">
 							<span>No Such {{subtitleInfo.season.status ? 'Series' : 'Movie'}} Found!</span>
 						</q-col>
 						<q-col class="col-4 text-right">
@@ -98,15 +102,22 @@
 
 <script lang='ts'>
 	import {Component, Vue} from "vue-property-decorator";
-	import {IMovieSearchResult, ISubtitleInfo} from "src/interfaces/IEssentials";
+	import {IMovieSearchResult, ISeries, ISubtitleInfo} from "src/interfaces/IEssentials";
 	import {CSubtitleLanguage} from "src/interfaces/Constants";
 	import SelectSubtitle from "components/SelectSubtitle.vue";
 	import {Loading, QSpinnerBars, QSpinnerGrid, QSpinnerPie} from "quasar";
+
+	const {MovieDb} = require('moviedb-promise')
+	const moviedb = new MovieDb(process.env.API_KEY)
+
+	const OS = require('opensubtitles-api');
+	const openSubtitle = new OS('UserAgent');
 
 	@Component({
 		components: {SelectSubtitle}
 	})
 	export default class Home extends Vue {
+
 		subtitleInfo: ISubtitleInfo = {
 			name: '',
 			lang: [CSubtitleLanguage.English, CSubtitleLanguage.Bengali],
@@ -119,8 +130,8 @@
 		langOptions: Array<any> = []
 		filterOptions: Array<any> = []
 
-		showSelectMovieDialog: boolean = false
-		movieSearchList: Array<IMovieSearchResult> = []
+		showListDialog: boolean = false
+		searchResultList: Array<IMovieSearchResult> = []
 
 		created() {
 			Object.keys(CSubtitleLanguage).forEach(value => {
@@ -130,7 +141,7 @@
 			this.filterOptions = this.langOptions
 
 			this.$root.$on('downloadDone', () => {
-				this.reset()
+				this.showListDialog = false
 			})
 		}
 
@@ -156,29 +167,28 @@
 				backgroundColor: this.$colors.positive,
 				message: 'Searching .....'
 			})
-			new Promise((resolve, reject) => {
-				this.$library.mdb.searchMovie({query: this.subtitleInfo.name}, async (err: any, res: any) => {
-					if (err) reject(err)
-					else resolve((res.results))
-
+			if (!this.subtitleInfo.season.status) {
+				moviedb.searchMovie({query: this.subtitleInfo.name}).then((res: any) => {
+					this.searchResultList = []
+					this.searchResultList = (res.results as Array<IMovieSearchResult>)
+				}).catch(console.error).finally(() => {
+					this.showListDialog = true
+				}).finally(() => {
+					Loading.hide()
 				})
-			}).then((results) => {
-				this.movieSearchList = (results as Array<IMovieSearchResult>)
-				Loading.hide()
-			}).catch((err) => {
-				this.$q.notify({
-					message: 'Not Found!',
-					caption: err,
-					color: this.$colors.negative,
-					icon: 'error',
-					progress: true,
+			} else {
+				moviedb.searchTv({query: this.subtitleInfo.name}).then((res: any) => {
+					this.searchResultList = []
+					this.searchResultList = (res.results as Array<IMovieSearchResult>)
+				}).catch(console.error).finally(() => {
+					this.showListDialog = true
+				}).finally(() => {
+					Loading.hide()
 				})
-			}).finally(() => {
-				this.showSelectMovieDialog = true
-			})
+			}
 		}
 
-		selectedMovie(movie: IMovieSearchResult) {
+		selected(info: IMovieSearchResult) {
 			Loading.show({
 				//@ts-ignore
 				spinner: QSpinnerGrid,
@@ -188,22 +198,39 @@
 				backgroundColor: this.$colors.positive,
 				message: 'Searching for the best subtitles [lang: ' + this.subtitleInfo.lang.join(',') + ']'
 			})
-			this.$library.mdb.movieInfo({id: movie.id}, async (err: any, res: any) => {
-				if (err) throw err
-				let response: IMovieSearchResult = res
-				this.$library.openSubtitle.search({
-					sublanguageid: this.subtitleInfo.lang.join(','),
-					extensions: ['srt', 'vtt'],
-					imdbid: response.imdb_id,
-					limit: '5',
-					query: response.imdb_id ? null : response.original_title,
-					gzip: false
-				}).then((subtitles: any) => {
-					this.$root.$emit('showSelectSubtitleDialog', subtitles)
-				}).finally(() => {
-					Loading.hide()
-				})
-			})
+			if (!this.subtitleInfo.season.status) {
+				moviedb.movieInfo({id: info.id}).then((res: IMovieSearchResult) => {
+					openSubtitle.search({
+						sublanguageid: this.subtitleInfo.lang.join(','),
+						extensions: ['srt', 'vtt'],
+						imdbid: res.imdb_id,
+						limit: '5',
+						query: res.imdb_id ? null : res.original_title,
+						gzip: false
+					}).then((subtitles: any) => {
+						this.$root.$emit('showSelectSubtitleDialog', subtitles)
+					}).finally(() => {
+						Loading.hide()
+					})
+				}).catch(console.error)
+			} else {
+				moviedb.tvExternalIds({id: info.id}).then((res: ISeries) => {
+					openSubtitle.search({
+						sublanguageid: this.subtitleInfo.lang.join(','),
+						extensions: ['srt', 'vtt'],
+						imdbid: res.imdb_id,
+						limit: '5',
+						season: String(this.subtitleInfo.season.no),
+						episode: String(this.subtitleInfo.season.ep),
+						query: res.id ? null : info.original_name,
+						gzip: false
+					}).then((subtitles: any) => {
+						this.$root.$emit('showSelectSubtitleDialog', subtitles)
+					}).finally(() => {
+						Loading.hide()
+					})
+				}).catch(console.error)
+			}
 		}
 
 		deepSearch() {
@@ -216,10 +243,12 @@
 				backgroundColor: this.$colors.negative,
 				message: 'Deep searching for the best subtitles [lang: ' + this.subtitleInfo.lang.join(',') + ']'
 			})
-			this.$library.openSubtitle.search({
+			openSubtitle.search({
 				sublanguageid: this.subtitleInfo.lang.join(','),
 				extensions: ['srt', 'vtt'],
 				limit: '5',
+				season: this.subtitleInfo.season.status ? String(this.subtitleInfo.season.no) : null,
+				episode: this.subtitleInfo.season.status ? String(this.subtitleInfo.season.ep) : null,
 				query: this.subtitleInfo.name,
 				gzip: false
 			}).then((subtitles: any) => {

@@ -42,7 +42,7 @@
 		<q-card v-else class="mma-card">
 			<q-card-section class="bg-amber text-black text-overline">
 				<q-row>
-					<q-col class="col-8">
+					<q-col class="col-8 text-left">
 						<span>No Subtitle</span>
 					</q-col>
 					<q-col class="col-4 text-right">
@@ -65,6 +65,7 @@
 
 		created() {
 			this.$root.$on('showSelectSubtitleDialog', (subtitles: any) => {
+				this.subtitleLists = []
 				Object.keys(subtitles).forEach(each => {
 					this.subtitleLists.push(subtitles[each])
 				})
@@ -92,6 +93,7 @@
 					progress: true,
 				})
 			}).finally(() => {
+				this.showSelectSubtitleDialog = false
 				this.$root.$emit('downloadDone')
 			})
 		}
