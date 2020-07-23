@@ -21,6 +21,10 @@ export interface IMovieSearchResult {
 	popularity?: number | any
 	poster_path?: string
 	release_date?: Date | any
+
+	first_air_date?: Date | any
+	original_name?: string
+
 	title?: string
 	video?: boolean | any
 	vote_average?: number | any
@@ -35,7 +39,18 @@ export interface IMovieSearchResult {
 	production_countries?: Array<any>
 	spoken_languages?: Array<any>
 	status?: string
-	tagline?:string
+	tagline?: string
+}
 
-	
+export interface ISeries {
+	id: string | number | any
+	imdb_id: string | number | any
+	tvdb_id: string | number | any
+	tvrage_id: string | number | any
+	twitter_id: string | number | any
+	instagram_id: string | number | any
+	freebase_id: string | number | any
+	facebook_id: string | number | any
+	freebase_mid: string | number | any
+
 }
