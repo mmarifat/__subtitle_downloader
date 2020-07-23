@@ -94,7 +94,7 @@
 	import {IMovieSearchResult, ISubtitleInfo} from "src/interfaces/IEssentials";
 	import {CSubtitleLanguage} from "src/interfaces/Constants";
 	import SelectSubtitle from "components/SelectSubtitle.vue";
-	import {Loading, QSpinnerBall, QSpinnerGrid} from "quasar";
+	import {Loading, QSpinnerBall, QSpinnerGrid, QSpinnerIos} from "quasar";
 
 	@Component({
 		components: {SelectSubtitle}
@@ -140,10 +140,34 @@
 		}
 
 		search() {
-			this.showSelectMovieDialog = true
-			this.$library.mdb.searchMovie({query: this.subtitleInfo.name}, async (err: any, res: any) => {
-				if (err) throw err
-				this.movieSearchList = (res.results as Array<IMovieSearchResult>)
+			Loading.show({
+				//@ts-ignore
+				spinner: QSpinnerIos,
+				customClass: 'text-h4',
+				spinnerColor: this.$colors.blue[10],
+				messageColor: this.$colors.blue[1],
+				backgroundColor: this.$colors.positive,
+				message: 'Searching .....'
+			})
+			new Promise((resolve, reject) => {
+				this.$library.mdb.searchMovie({query: this.subtitleInfo.name}, async (err: any, res: any) => {
+					if (err) reject(err)
+					else resolve((res.results))
+
+				})
+			}).then((results) => {
+				this.movieSearchList = (results as Array<IMovieSearchResult>)
+				Loading.hide()
+			}).catch((err) => {
+				this.$q.notify({
+					message: 'Not Found!',
+					caption: err,
+					color: this.$colors.negative,
+					icon: 'error',
+					progress: true,
+				})
+			}).finally(() => {
+				this.showSelectMovieDialog = true
 			})
 		}
 
