@@ -8,6 +8,7 @@ node_modules
 .quasar
 /dist
 dist.zip
+dist-pwa.zip
 .env
 .env.prod
 public/.htaccess
@@ -18,6 +19,7 @@ public/.htaccess
 /src-cordova/plugins
 /src-cordova/www
 src-cordova
+src-pwa
 
 # Capacitor related directories and files
 /src-capacitor/www
