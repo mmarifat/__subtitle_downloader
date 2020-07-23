@@ -91,10 +91,10 @@ module.exports = configure(function (/* ctx */) {
 
 			// Quasar plugins
 			plugins: [
-				'Notify', 'LoadingBar'
+				'Notify', 'LoadingBar', "Loading"
 			],
 			config: {
-				loadingBar: {size: '10px', position: 'top'}
+				loadingBar: {size: '10px', position: 'bottom'}
 			},
 		},
 

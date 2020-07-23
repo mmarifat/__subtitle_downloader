@@ -1,69 +1,69 @@
 <template>
 	<q-container>
-		<q-row class="justify-center">
-			<q-col class="col-12 col-md-6">
-				<q-card class="row">
-					<!--this prevent means without verification search button eon't work-->
-					<q-form greedy @submit.prevent="searchSubtitle">
-						<q-card-section class="row q-col-gutter-md">
-							<q-col class="col-12 col-md-6 text-right">
-								<q-toggle v-model="subtitleInfo.season.status" label="Series" left-label icon="check_box"/>
-							</q-col>
-							<q-col class="col-12 col-md-6">
-								<q-input v-model="subtitleInfo.name" stack-label label="Name"
-								         :rules="[$common.rules.required]"/>
-							</q-col>
-							<q-col class="col-6" v-if="subtitleInfo.season.status">
-								<q-input v-model.number="subtitleInfo.season.no" label="Series No"
-								         :rules="[$common.rules.required, $common.rules.number]"/>
-							</q-col>
-							<q-col class="col-6" v-if="subtitleInfo.season.status">
-								<q-input v-model.number="subtitleInfo.season.ep" label="Episode No"
-								         :rules="[$common.rules.required, $common.rules.number]"/>
-							</q-col>
-							<q-col class="col-12 col-md-6">
-								<q-select v-model="subtitleInfo.lang" label="Select Language" :options="langOptions" clearable clear-icon="clear"
-								          use-input input-debounce="200" @filter="filterLang" map-options emit-value multiple
-								          :rules="[$common.rules.required]"/>
-							</q-col>
-						</q-card-section>
-						<q-card-actions align="right">
-							<q-btn flat @click="reset" :color="$colors.negative">Cancel</q-btn>
-							<q-space/>
-							<q-btn flat type="submit" :color="$colors.primary">Search</q-btn>
-						</q-card-actions>
-					</q-form>
-				</q-card>
-			</q-col>
+		<q-row class="row justify-center">
+			<q-card class="col-12 col-md-6">
+				<!--this prevent means without verification search button eon't work-->
+				<q-form greedy @submit.prevent="search">
+					<q-card-section class="row q-col-gutter-md">
+						<q-col class="col-12 col-md-12 text-right">
+							<q-toggle v-model="subtitleInfo.season.status" label="Series" left-label icon="check_box"/>
+						</q-col>
+						<q-col class="col-12 col-md-6">
+							<q-input v-model="subtitleInfo.name" stack-label label="Name"
+							         :rules="[$common.rules.required]"/>
+						</q-col>
+						<q-col class="col-6" v-if="subtitleInfo.season.status">
+							<q-input v-model.number="subtitleInfo.season.no" label="Series No"
+							         :rules="[$common.rules.required, $common.rules.number]"/>
+						</q-col>
+						<q-col class="col-6" v-if="subtitleInfo.season.status">
+							<q-input v-model.number="subtitleInfo.season.ep" label="Episode No"
+							         :rules="[$common.rules.required, $common.rules.number]"/>
+						</q-col>
+						<q-col class="col-12 col-md-6">
+							<q-select v-model="subtitleInfo.lang" label="Select Language" :options="langOptions" clearable clear-icon="clear"
+							          use-input input-debounce="200" @filter="filterLang" map-options emit-value multiple
+							          :rules="[$common.rules.required]"/>
+						</q-col>
+					</q-card-section>
+					<q-card-actions align="right">
+						<q-btn flat @click="reset" :color="$colors.negative">Reset</q-btn>
+						<q-space/>
+						<q-btn flat type="submit" :color="$colors.primary">Search</q-btn>
+					</q-card-actions>
+				</q-form>
+			</q-card>
 		</q-row>
 
-		<q-dialog v-model="showSelectMovieDialog" position="bottom" transition-show="slide-up" transition-hide="slide-down">
+		<q-dialog v-model="showSelectMovieDialog" transition-show="slide-down" transition-hide="slide-up">
 			<q-card class="mma-card" v-if="movieSearchList.length">
 				<q-linear-progress :value="1" :color="$colors.primary"/>
-				<q-card-section>
-					<q-row>
-						<q-col class="col-8">
-							<span class="text-h6 text-uppercase">Select {{subtitleInfo.season.status ? 'Series' : 'Movie'}}</span>
-						</q-col>
-						<q-col class="col-4 text-right">
-							<q-icon name="close" :color="$colors.dark" size="md" v-close-popup/>
-						</q-col>
-					</q-row>
-
+				<q-card-section class="row">
+					<q-col class="col-8 q-pl-sm">
+						<span class="text-h6 text-uppercase">Select {{subtitleInfo.season.status ? 'Series' : 'Movie'}}</span>
+					</q-col>
+					<q-col class="col-4 text-right">
+						<q-icon name="close" :color="$colors.dark" size="md" v-close-popup/>
+					</q-col>
 				</q-card-section>
 
 				<q-card-section class="q-pr-lg">
 					<q-row class="q-col-gutter-sm">
-						<q-col class="col-12" v-for="each in movieSearchList" :key="each.id">
+						<q-col class="col-12" v-for="each in movieSearchList" :key="each.id+String(Math.random())">
 							<q-list bordered padding dense>
 								<q-item clickable @click="selectedMovie(each)">
 									<q-item-section>
-										<q-item-label overline v-html="each.original_title"/>
-										<!--<q-item-label caption v-html="each.overview"/>-->
+										<q-item-label overline v-html="each.original_title" class="q-pb-sm"/>
+										<q-item-label caption v-html="'Release: '+$common.convertDate(each.release_date, 'DD MMM, YYYY')"/>
 									</q-item-section>
 
-									<q-item-section side>
-										<q-item-label caption v-html="$common.convertDate(each.release_date, 'DD MMM, YYYY')"/>
+									<q-item-section side top>
+										<q-img :src="each.poster_path ? imagePath(each.poster_path) : 'images/not_available.svg'"
+										       alt="images/not_available.svg" height="15vh" width="15vh">
+											<template v-slot:loading>
+												<q-spinner-bars :color="$colors.blue[10]"/>
+											</template>
+										</q-img>
 									</q-item-section>
 								</q-item>
 							</q-list>
@@ -72,10 +72,13 @@
 				</q-card-section>
 			</q-card>
 
-			<q-card v-else style="width: 700px; max-width: 90vw;">
+			<q-card v-else class="mma-card text-center">
 				<q-card-section class="bg-amber text-black text-overline">
-					No Movies / Series
+					No Such {{subtitleInfo.season.status ? 'Series' : 'Movie'}} Found!
 				</q-card-section>
+				<q-card-actions class="justify-center">
+					<q-btn label="Deep Search" @click="deepSearch" :color="$colors.primary"/>
+				</q-card-actions>
 			</q-card>
 		</q-dialog>
 
@@ -88,6 +91,7 @@
 	import {IMovieSearchResult, ISubtitleInfo} from "src/interfaces/IEssentials";
 	import {CSubtitleLanguage} from "src/interfaces/Constants";
 	import SelectSubtitle from "components/SelectSubtitle.vue";
+	import {Loading, QSpinnerBall, QSpinnerGrid} from "quasar";
 
 	@Component({
 		components: {SelectSubtitle}
@@ -132,31 +136,67 @@
 			})
 		}
 
-		searchSubtitle() {
-			//lets search the movie from input box value
+		search() {
+			this.showSelectMovieDialog = true
 			this.$library.mdb.searchMovie({query: this.subtitleInfo.name}, async (err: any, res: any) => {
 				if (err) throw err
 				this.movieSearchList = (res.results as Array<IMovieSearchResult>)
 			})
-			this.showSelectMovieDialog = true
 		}
 
 		selectedMovie(movie: IMovieSearchResult) {
+			Loading.show({
+				//@ts-ignore
+				spinner: QSpinnerGrid,
+				customClass: 'text-h4',
+				spinnerColor: this.$colors.blue[10],
+				messageColor: this.$colors.blue[1],
+				backgroundColor: this.$colors.positive,
+				message: 'Searching for the best subtitles [lang: ' + this.subtitleInfo.lang.join(',') + ']'
+			})
 			this.$library.mdb.movieInfo({id: movie.id}, async (err: any, res: any) => {
 				if (err) throw err
 				let response: IMovieSearchResult = res
-				console.log(this.subtitleInfo);
 				this.$library.openSubtitle.search({
 					sublanguageid: this.subtitleInfo.lang.join(','),
 					extensions: ['srt', 'vtt'],
 					imdbid: response.imdb_id,
-					limit: 'best',
+					limit: '5',
 					query: response.imdb_id ? null : response.original_title,
 					gzip: false
 				}).then((subtitles: any) => {
 					this.$root.$emit('showSelectSubtitleDialog', subtitles)
+				}).finally(() => {
+					Loading.hide()
 				})
 			})
+		}
+
+		deepSearch() {
+			Loading.show({
+				//@ts-ignore
+				spinner: QSpinnerBall,
+				customClass: 'text-h4',
+				spinnerColor: this.$colors.blue[10],
+				messageColor: this.$colors.blue[1],
+				backgroundColor: this.$colors.negative,
+				message: 'Deep searching for the best subtitles [lang: ' + this.subtitleInfo.lang.join(',') + ']'
+			})
+			this.$library.openSubtitle.search({
+				sublanguageid: this.subtitleInfo.lang.join(','),
+				extensions: ['srt', 'vtt'],
+				limit: '5',
+				query: this.subtitleInfo.name,
+				gzip: false
+			}).then((subtitles: any) => {
+				this.$root.$emit('showSelectSubtitleDialog', subtitles)
+			}).finally(() => {
+				Loading.hide()
+			})
+		}
+
+		imagePath(suffix: string) {
+			return 'https://image.tmdb.org/t/p/w500' + suffix
 		}
 
 		reset() {

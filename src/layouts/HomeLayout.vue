@@ -1,10 +1,10 @@
 <template>
 	<q-layout view="lHr lpR lfr">
-		<q-header elevated class="bg-amber-1 text-overline text-black">
+		<q-header elevated class="bg-amber text-indigo-10 text-uppercase">
 			<q-toolbar>
 				<q-toolbar-title>
-					<q-avatar icon="subtitles" rounded size="50px"/>
-					Subtitle Downloader
+					<q-avatar icon="subtitles" rounded size="50px" :text-color="$colors.indigo[10]"/>
+					<span>Subtitle Downloader</span>
 				</q-toolbar-title>
 				<q-btn dense flat round icon="menu" @click="right = !right"/>
 			</q-toolbar>
@@ -17,11 +17,17 @@
 				</div>
 			</q-img>
 			<q-list bordered>
-				<q-item clickable v-ripple :to="{name: 'aboutMe'}">
+				<q-item clickable v-ripple :to="{name: 'dashboard'}" exact>
+					<q-item-section avatar>
+						<q-icon :color="$colors.primary" name="dashboard"/>
+					</q-item-section>
+					<q-item-section>Home</q-item-section>
+				</q-item>
+				<q-item clickable v-ripple :to="{name: 'aboutMe'}" exact>
 					<q-item-section avatar>
 						<q-icon :color="$colors.primary" name="perm_contact_calendar"/>
 					</q-item-section>
-					<q-item-section>About Me</q-item-section>
+					<q-item-section>About Developer</q-item-section>
 				</q-item>
 			</q-list>
 		</q-drawer>

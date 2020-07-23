@@ -15,6 +15,7 @@ node_modules
 /src-cordova/platforms
 /src-cordova/plugins
 /src-cordova/www
+src-cordova
 
 # Capacitor related directories and files
 /src-capacitor/www
