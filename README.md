@@ -34,7 +34,8 @@ quasar build -m ios (IPA)
 
 ### Get App
 ```bash
-Install platform base app by visiting website first time after PWA build. No extra hassle
+Install platform base app by visiting website first time after PWA build. 
+No extra hassle. Not Recommende.  
 ```
 
 
