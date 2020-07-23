@@ -1,7 +1,7 @@
 {
 	"name": "subtitle_downloader",
 	"version": "0.0.1",
-	"description": "Subtitle Downloader App",
+	"description": "Subtitle Downloader",
 	"productName": "MSUB",
 	"author": "mmarifat <mma.rifat66@gmail.com>",
 	"private": true,
@@ -16,17 +16,16 @@
 		"@quasar/extras": "^1.9.0",
 		"axios": "^0.19.2",
 		"core-js": "^3.6.5",
-		"moviedb": "^0.2.10",
+		"moviedb-promise": "^3.0.3",
 		"opensubtitles-api": "^5.1.2",
 		"quasar": "^1.12.13",
-		"vue-class-component": "^7.2.4",
+		"vue-class-component": "^7.2.5",
 		"vue-i18n": "^8.18.2",
 		"vue-property-decorator": "^9.0.0"
 	},
 	"devDependencies": {
 		"@quasar/app": "^2.0.6",
 		"@quasar/quasar-app-extension-dotenv": "^1.0.5",
-		"@types/moviedb": "^0.0.29",
 		"@types/node": "^14.0.24",
 		"workbox-webpack-plugin": "^5.0.0"
 	},

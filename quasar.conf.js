@@ -112,9 +112,9 @@ module.exports = configure(function (/* ctx */) {
 			workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
 			workboxOptions: {}, // only for GenerateSW
 			manifest: {
-				name: `SUBTITLE DOWNLOADER`,
+				name: `MSUB`,
 				short_name: `MSUB`,
-				description: `Subtitle Downloader App`,
+				description: `SUBTITLE DOWNLOADER`,
 				display: 'standalone',
 				orientation: 'portrait',
 				background_color: '#ffffff',
@@ -152,7 +152,7 @@ module.exports = configure(function (/* ctx */) {
 		// Full list of options: https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
 		cordova: {
 			// noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
-			id: 'com.mmarifat.opensub'
+			id: 'com.mmarifat.msub'
 		},
 
 		// Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
@@ -180,7 +180,7 @@ module.exports = configure(function (/* ctx */) {
 			builder: {
 				// https://www.electron.build/configuration/configuration
 
-				appId: 'opensub'
+				appId: 'msub'
 			},
 
 			// More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
