@@ -2,9 +2,11 @@
 	<section class="row justify-center">
 		<q-card class="q-mt-lg" flat>
 			<q-card-section class="text-center">
-				<q-avatar size="150px" class="shadow-22">
-					<img src="images/me.jpg" alt="">
-				</q-avatar>
+				<q-img src="images/me.jpg" alt="" class="custom-image shadow-22">
+					<template v-slot:loading>
+						<q-spinner-tail :color="$colors.blue[10]"/>
+					</template>
+				</q-img>
 			</q-card-section>
 
 			<q-card-section class="q-pt-none text-center ">
@@ -42,5 +44,9 @@
 	.about-card {
 		width: 100%;
 		max-width: 300px
+	}
+
+	.custom-image {
+		border-radius: 20%;
 	}
 </style>

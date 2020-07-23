@@ -15,11 +15,11 @@
 							<q-input v-model="subtitleInfo.name" stack-label label="Name"
 							         :rules="[$common.rules.required]"/>
 						</q-col>
-						<q-col class="col-12 col-md-6" v-if="subtitleInfo.season.status">
+						<q-col class="col-6" v-if="subtitleInfo.season.status">
 							<q-input v-model.number="subtitleInfo.season.no" label="Series No"
 							         :rules="[$common.rules.required, $common.rules.number]"/>
 						</q-col>
-						<q-col class="col-12 col-md-6" v-if="subtitleInfo.season.status">
+						<q-col class="col-6" v-if="subtitleInfo.season.status">
 							<q-input v-model.number="subtitleInfo.season.ep" label="Episode No"
 							         :rules="[$common.rules.required, $common.rules.number]"/>
 						</q-col>
