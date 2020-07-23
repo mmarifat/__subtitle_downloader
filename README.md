@@ -7,10 +7,8 @@ A Subtitle Downloader App Using NodeJS
 yarn install
 ```
 ## Set API KEY
-```bash
-Get from here [themoviedb](https://www.themoviedb.org/).
+Get from here [themoviedb](https://themoviedb.org/).
 Rename .env.example to .env
-```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash

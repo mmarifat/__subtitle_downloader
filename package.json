@@ -2,7 +2,7 @@
 	"name": "subtitle_downloader",
 	"version": "0.0.1",
 	"description": "A Subtitle Downloader App Using NodeJS",
-	"productName": "Subtitle Downloader App",
+	"productName": "Subtitle Downloader",
 	"author": "mmarifat <mma.rifat66@gmail.com>",
 	"private": true,
 	"scripts": {

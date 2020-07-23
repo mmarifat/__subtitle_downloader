@@ -1,26 +1,29 @@
 <template>
 	<q-container>
 		<q-row class="row justify-center">
-			<q-card class="col-12 col-md-6">
+			<q-card class="col-12 col-md-6 bg-transparent" bordered square>
 				<!--this prevent means without verification search button eon't work-->
 				<q-form greedy @submit.prevent="search">
-					<q-card-section class="row q-col-gutter-md">
-						<q-col class="col-12 col-md-12 text-right">
+					<q-card-section class="row q-col-gutter-md text-overline">
+						<q-col class="col-6">
+							<span>Information</span>
+						</q-col>
+						<q-col class="col-6 text-right">
 							<q-toggle v-model="subtitleInfo.season.status" label="Series" left-label icon="check_box"/>
 						</q-col>
-						<q-col class="col-12 col-md-6">
+						<q-col class="col-12">
 							<q-input v-model="subtitleInfo.name" stack-label label="Name"
 							         :rules="[$common.rules.required]"/>
 						</q-col>
-						<q-col class="col-6" v-if="subtitleInfo.season.status">
+						<q-col class="col-12 col-md-6" v-if="subtitleInfo.season.status">
 							<q-input v-model.number="subtitleInfo.season.no" label="Series No"
 							         :rules="[$common.rules.required, $common.rules.number]"/>
 						</q-col>
-						<q-col class="col-6" v-if="subtitleInfo.season.status">
+						<q-col class="col-12 col-md-6" v-if="subtitleInfo.season.status">
 							<q-input v-model.number="subtitleInfo.season.ep" label="Episode No"
 							         :rules="[$common.rules.required, $common.rules.number]"/>
 						</q-col>
-						<q-col class="col-12 col-md-6">
+						<q-col class="col-12">
 							<q-select v-model="subtitleInfo.lang" label="Select Language" :options="langOptions" clearable clear-icon="clear"
 							          use-input input-debounce="200" @filter="filterLang" map-options emit-value multiple
 							          :rules="[$common.rules.required]"/>
@@ -36,7 +39,7 @@
 		</q-row>
 
 		<q-dialog v-model="showSelectMovieDialog" transition-show="slide-down" transition-hide="slide-up">
-			<q-card class="mma-card" v-if="movieSearchList.length">
+			<q-card class="mma-card custom-background" v-if="movieSearchList.length">
 				<q-linear-progress :value="1" :color="$colors.primary"/>
 				<q-card-section class="row">
 					<q-col class="col-8 q-pl-sm">
