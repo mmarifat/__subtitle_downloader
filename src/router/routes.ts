@@ -9,6 +9,27 @@ const routes: RouteConfig[] = [
 			{path: '/about', name: 'aboutMe', component: () => import('components/AboutMe.vue')}
 		]
 	},
+	{
+		path: '/facebook',
+		name: 'facebook',
+		beforeEnter() {
+			window.open("https://www.facebook.com/mma.rifat6", "_blank");
+		},
+	},
+	{
+		path: '/github',
+		name: 'github',
+		beforeEnter() {
+			window.open("https://www.github.com/mmarifat", "_blank");
+		},
+	},
+	{
+		path: '/instagram',
+		name: 'instagram',
+		beforeEnter() {
+			window.open("https://www.instagram.com/mma.rifat", "_blank");
+		},
+	},
 
 	// Always leave this as last one,
 	// but you can also remove it
