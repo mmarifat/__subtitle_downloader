@@ -1,5 +1,5 @@
 <template>
-	<q-dialog v-model="showSelectSubtitleDialog" position="top" transition-show="slide-up" transition-hide="slide-down">
+	<q-dialog v-model="showSelectSubtitleDialog" transition-show="slide-up" transition-hide="slide-down">
 		<q-card class="mma-card" v-if="subtitleLists.length">
 			<q-linear-progress :value="1" :color="$colors.positive"/>
 			<q-card-section>
@@ -11,7 +11,6 @@
 						<q-icon name="close" :color="$colors.dark" size="md" v-close-popup/>
 					</q-col>
 				</q-row>
-
 			</q-card-section>
 
 			<q-card-section class="q-pr-lg">
@@ -42,7 +41,14 @@
 
 		<q-card v-else class="mma-card">
 			<q-card-section class="bg-amber text-black text-overline">
-				No Subtitles
+				<q-row>
+					<q-col class="col-8">
+						<span>No Subtitle</span>
+					</q-col>
+					<q-col class="col-4 text-right">
+						<q-icon name="close" :color="$colors.dark" size="md" v-close-popup/>
+					</q-col>
+				</q-row>
 			</q-card-section>
 		</q-card>
 	</q-dialog>

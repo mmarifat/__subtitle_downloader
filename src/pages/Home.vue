@@ -77,7 +77,14 @@
 
 			<q-card v-else class="mma-card text-center">
 				<q-card-section class="bg-amber text-black text-overline">
-					No Such {{subtitleInfo.season.status ? 'Series' : 'Movie'}} Found!
+					<q-row>
+						<q-col class="col-8">
+							<span>No Such {{subtitleInfo.season.status ? 'Series' : 'Movie'}} Found!</span>
+						</q-col>
+						<q-col class="col-4 text-right">
+							<q-icon name="close" :color="$colors.dark" size="md" v-close-popup/>
+						</q-col>
+					</q-row>
 				</q-card-section>
 				<q-card-actions class="justify-center">
 					<q-btn label="Deep Search" @click="deepSearch" :color="$colors.primary"/>
@@ -94,7 +101,7 @@
 	import {IMovieSearchResult, ISubtitleInfo} from "src/interfaces/IEssentials";
 	import {CSubtitleLanguage} from "src/interfaces/Constants";
 	import SelectSubtitle from "components/SelectSubtitle.vue";
-	import {Loading, QSpinnerBall, QSpinnerGrid, QSpinnerIos} from "quasar";
+	import {Loading, QSpinnerBars, QSpinnerGrid, QSpinnerPie} from "quasar";
 
 	@Component({
 		components: {SelectSubtitle}
@@ -142,7 +149,7 @@
 		search() {
 			Loading.show({
 				//@ts-ignore
-				spinner: QSpinnerIos,
+				spinner: QSpinnerBars,
 				customClass: 'text-h4',
 				spinnerColor: this.$colors.blue[10],
 				messageColor: this.$colors.blue[1],
@@ -176,7 +183,7 @@
 				//@ts-ignore
 				spinner: QSpinnerGrid,
 				customClass: 'text-h4',
-				spinnerColor: this.$colors.blue[10],
+				spinnerColor: this.$colors.yellow[10],
 				messageColor: this.$colors.blue[1],
 				backgroundColor: this.$colors.positive,
 				message: 'Searching for the best subtitles [lang: ' + this.subtitleInfo.lang.join(',') + ']'
@@ -202,9 +209,9 @@
 		deepSearch() {
 			Loading.show({
 				//@ts-ignore
-				spinner: QSpinnerBall,
+				spinner: QSpinnerPie,
 				customClass: 'text-h4',
-				spinnerColor: this.$colors.blue[10],
+				spinnerColor: this.$colors.yellow[10],
 				messageColor: this.$colors.blue[1],
 				backgroundColor: this.$colors.negative,
 				message: 'Deep searching for the best subtitles [lang: ' + this.subtitleInfo.lang.join(',') + ']'
