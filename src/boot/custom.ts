@@ -5,20 +5,6 @@ import QRow from "components/core/QRow.vue";
 import QCol from "components/core/QCol.vue";
 import QContainer from "components/core/QContainer.vue";
 
-import MovieDB from 'moviedb';
-
-//as openSubtitle-api has no type definition we need to use as require
-const OS = require('opensubtitles-api');
-
-//@ts-ignore
-const mdb = MovieDB(process.env.API_KEY)
-const openSubtitle = new OS('UserAgent');
-
-export interface ILibrary {
-	mdb: any
-	openSubtitle: any
-}
-
 export interface ICommon {
 	rules: {
 		required(value: any): boolean | string,
@@ -102,10 +88,6 @@ export interface IColor {
 	blueGrey: {
 		[s: number]: string
 	},
-}
-
-export const library: ILibrary = {
-	mdb, openSubtitle
 }
 
 export const common: ICommon = {
@@ -486,7 +468,6 @@ export const color: any = {
 
 declare module 'vue/types/vue' {
 	interface Vue {
-		$library: ILibrary
 		$common: ICommon
 		$colors: IColor
 	}
@@ -496,7 +477,6 @@ export default boot(({Vue, app}: any) => {
 	Vue.component('QRow', QRow);
 	Vue.component('QCol', QCol);
 	Vue.component('QContainer', QContainer);
-	Vue.prototype.$library = library
 	Vue.prototype.$common = common
 	Vue.prototype.$colors = color
 });
