@@ -1,10 +1,10 @@
 <template>
 	<section class="row justify-center">
-		<q-card class="q-mt-lg" flat>
+		<q-card class="q-mt-lg bg-transparent" flat>
 			<q-card-section class="text-center">
-				<q-img src="images/me.jpg" alt="" class="custom-image shadow-22">
+				<q-img src="/images/me.jpg" class="custom-image shadow-22">
 					<template v-slot:loading>
-						<q-spinner-tail :color="$colors.blue[10]"/>
+						<q-spinner-pie :color="$colors.blue[10]" size="30px"/>
 					</template>
 				</q-img>
 			</q-card-section>
@@ -14,7 +14,7 @@
 					Minhaz Ahamed Rifat
 				</div>
 				<div class="text-caption text-grey-8">
-					Software Engineer
+					Software Engineer, Lions Tech
 				</div>
 			</q-card-section>
 
@@ -33,10 +33,6 @@
 	@Component
 	export default class AboutMe extends Vue {
 
-		stars: number = 4
-
-		created() {
-		}
 	}
 </script>
 

@@ -69,7 +69,6 @@
 				Object.keys(subtitles).forEach(each => {
 					this.subtitleLists.push(subtitles[each])
 				})
-				console.log(this.subtitleLists);
 				this.showSelectSubtitleDialog = true
 			})
 		}

@@ -11,7 +11,6 @@ dist.zip
 dist-pwa.zip
 .env
 .env.prod
-public/.htaccess
 
 # Cordova related directories and files
 /src-cordova/node_modules
@@ -41,3 +40,4 @@ yarn.lock
 *.ntvs*
 *.njsproj
 *.sln
+/.firebase
