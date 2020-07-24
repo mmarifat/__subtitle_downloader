@@ -27,9 +27,9 @@ quasar build (SPA)
 
 quasar build -m pwa (Progressive Web App - Not Recommended)
 
-quasar build -m android (APK)
+quasar build -m capacitor -T android (APK)
 
-quasar build -m ios (IPA)
+quasar build -m capacitor -T ios (IPA)
 ```
 
 ### Get App

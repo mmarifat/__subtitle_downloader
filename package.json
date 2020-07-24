@@ -10,7 +10,8 @@
 		"build": "quasar build",
 		"dev-pwa": "quasar dev -m pwa",
 		"build-pwa": "quasar build -m pwa",
-		"android": "quasar build -m android"
+		"ios": "quasar build -m capacitor -T ios",
+		"android": "quasar build -m capacitor -T android"
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.9.0",
