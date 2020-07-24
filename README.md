@@ -18,14 +18,14 @@ API_KEY = your moviedb api
 ```bash
 quasar dev (Single Page App)
 
-quasar dev -m pwa (Progressive Web App - Recommended)
+quasar dev -m pwa (Progressive Web App - Not Recommended)
 ```
 
 ### Build the app for production
 ```bash
 quasar build (SPA)
 
-quasar build -m pwa (Progressive Web App - Recommended)
+quasar build -m pwa (Progressive Web App - Not Recommended)
 
 quasar build -m android (APK)
 
@@ -34,7 +34,8 @@ quasar build -m ios (IPA)
 
 ### Get App
 ```bash
-Install platform base app by visiting website first time after PWA build. No extra hassle
+Install platform base app by visiting website first time after PWA build. 
+No extra hassle. Not Recommende.  
 ```
 
 
