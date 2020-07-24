@@ -73,7 +73,7 @@ module.exports = configure(function (/* ctx */) {
 		// Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
 		devServer: {
 			clientLogLevel: "silent",
-			https: true,
+			https: false,
 			port: 9090,
 			open: true // opens browser window automatically
 		},
@@ -91,10 +91,10 @@ module.exports = configure(function (/* ctx */) {
 
 			// Quasar plugins
 			plugins: [
-				'Notify', 'LoadingBar', "Loading","SessionStorage"
+				'Notify', 'Dialog', 'LoadingBar', 'Loading', 'SessionStorage', 'LocalStorage', 'Meta'
 			],
 			config: {
-				loadingBar: {size: '10px', position: 'bottom'}
+				loadingBar: {size: '8px', position: 'bottom'}
 			},
 		},
 
