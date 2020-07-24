@@ -2,11 +2,7 @@
 	<section class="row justify-center">
 		<q-card class="q-mt-lg bg-transparent" flat>
 			<q-card-section class="text-center">
-				<q-img src="/images/me.jpg" class="custom-image shadow-22">
-					<template v-slot:loading>
-						<q-spinner-pie :color="$colors.blue[10]" size="30px"/>
-					</template>
-				</q-img>
+				<q-img  position="0 0" contain src="/images/me.jpg" class="custom-image shadow-22" alt="msub"/>
 			</q-card-section>
 
 			<q-card-section class="q-pt-none text-center ">

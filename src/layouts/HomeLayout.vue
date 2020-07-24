@@ -1,7 +1,8 @@
 <template>
-	<q-layout view="lHr lpR lfr" class="custom-background">
-		<q-header elevated class="custom-background text-indigo-10 text-uppercase">
-			<q-toolbar>
+	<q-layout view="lHh Lpr lFf" class="custom-background">
+		<q-header bordered reveal class="custom-background text-indigo-10 text-uppercase" style="height: 80px">
+			<q-container class="row">
+				<q-space/>
 				<q-item clickable :to="{name: 'dashboard'}" exact>
 					<q-item-label overline>
 						<q-avatar icon="subtitles" rounded size="50px" :text-color="$colors.indigo[10]"/>
@@ -10,7 +11,7 @@
 				</q-item>
 				<q-space/>
 				<q-btn dense flat round icon="menu" @click="right = !right"/>
-			</q-toolbar>
+			</q-container>
 		</q-header>
 
 		<q-drawer v-model="right" side="right" behavior="mobile" elevated>
