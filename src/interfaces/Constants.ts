@@ -24,3 +24,12 @@ export enum CSubtitleLanguage {
 	"Thai" = "tha",
 	"Korean" = "kor"
 }
+
+export enum ResponseStatus {
+	SUCCESS = 200,
+	FAILED = 204,
+	ERROR = 400,
+	SESSION_EXPIRED = 401,
+	ACCESSDENIED = 403,
+	INVALID = 404
+}

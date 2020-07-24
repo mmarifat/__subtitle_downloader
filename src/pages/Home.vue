@@ -143,6 +143,10 @@
 			this.$root.$on('downloadDone', () => {
 				this.showListDialog = false
 			})
+
+			this.$axios.get('/imdbid-848228/sublanguageid-eng').then(res => {
+				console.log(res.data);
+			})
 		}
 
 		filterLang(val: string, update: Function) {
@@ -171,6 +175,7 @@
 				moviedb.searchMovie({query: this.subtitleInfo.name}).then((res: any) => {
 					this.searchResultList = []
 					this.searchResultList = (res.results as Array<IMovieSearchResult>)
+					console.log(this.searchResultList);
 				}).catch(console.error).finally(() => {
 					this.showListDialog = true
 				}).finally(() => {
