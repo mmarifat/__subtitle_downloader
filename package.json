@@ -12,24 +12,25 @@
 		"build-pwa": "quasar build -m pwa",
 		"ios": "quasar build -m capacitor -T ios",
 		"android": "quasar build -m capacitor -T android",
-		"deploy": "node scripts/gh-pages-deploy.js"
+		"deploy": "quasar build && push-dir --dir=dist/spa --remote=gh-pages --branch=master"
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.9.0",
 		"axios": "^0.19.2",
 		"core-js": "^3.6.5",
+		"execa": "latest",
 		"moviedb-promise": "^3.0.3",
 		"opensubtitles-api": "^5.1.2",
 		"quasar": "^1.12.13",
 		"vue-class-component": "^7.2.5",
 		"vue-i18n": "^8.18.2",
-		"vue-property-decorator": "^9.0.0",
-		"execa": "latest"
+		"vue-property-decorator": "^9.0.0"
 	},
 	"devDependencies": {
 		"@quasar/app": "^2.0.6",
 		"@quasar/quasar-app-extension-dotenv": "^1.0.5",
 		"@types/node": "^14.0.24",
+		"push-dir": "^0.4.1",
 		"workbox-webpack-plugin": "^5.0.0"
 	},
 	"browserslist": [
