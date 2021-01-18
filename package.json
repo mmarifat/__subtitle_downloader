@@ -8,11 +8,9 @@
 	"scripts": {
 		"dev": "quasar dev",
 		"build": "quasar build",
-		"dev-pwa": "quasar dev -m pwa",
-		"build-pwa": "quasar build -m pwa",
 		"ios": "quasar build -m capacitor -T ios",
 		"android": "quasar build -m capacitor -T android",
-		"deploy": "quasar build && push-dir --dir=dist/spa --remote=gh-pages --branch=master"
+		"deploy": "node scripts/gh-pages-deploy.js"
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.9.13",
@@ -30,7 +28,6 @@
 		"@quasar/app": "^2.1.14",
 		"@quasar/quasar-app-extension-dotenv": "^1.0.5",
 		"@types/node": "^14.14.21",
-		"push-dir": "^0.4.1",
 		"workbox-webpack-plugin": "^6.0.2"
 	},
 	"browserslist": [
