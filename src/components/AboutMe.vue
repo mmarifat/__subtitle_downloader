@@ -10,7 +10,7 @@
 					Minhaz Ahamed Rifat
 				</div>
 				<div class="text-caption text-grey-8">
-					Software Engineer, Lions Tech
+					Software Developer, Simec System Ltd.
 				</div>
 			</q-card-section>
 
