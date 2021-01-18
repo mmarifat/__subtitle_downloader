@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.9.0",
-		"axios": "^0.19.2",
+		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
 		"execa": "latest",
 		"moviedb-promise": "^3.0.3",
