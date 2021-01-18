@@ -11,7 +11,8 @@
 		"dev-pwa": "quasar dev -m pwa",
 		"build-pwa": "quasar build -m pwa",
 		"ios": "quasar build -m capacitor -T ios",
-		"android": "quasar build -m capacitor -T android"
+		"android": "quasar build -m capacitor -T android",
+		"deploy": "node scripts/gh-pages-deploy.js"
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.9.0",
@@ -22,7 +23,8 @@
 		"quasar": "^1.12.13",
 		"vue-class-component": "^7.2.5",
 		"vue-i18n": "^8.18.2",
-		"vue-property-decorator": "^9.0.0"
+		"vue-property-decorator": "^9.0.0",
+		"execa": "latest"
 	},
 	"devDependencies": {
 		"@quasar/app": "^2.0.6",
