@@ -10,7 +10,7 @@ const {configure} = require('quasar/wrappers');
 
 module.exports = configure(function (/* ctx */) {
 	return {
-		publicPath:'__subtitle_download',
+		publicPath:'__subtitle_downloader',
 		// https://quasar.dev/quasar-cli/supporting-ts
 		supportTS: true,
 
