@@ -15,23 +15,23 @@
 		"deploy": "quasar build && push-dir --dir=dist/spa --remote=gh-pages --branch=master"
 	},
 	"dependencies": {
-		"@quasar/extras": "^1.9.0",
-		"axios": "^0.19.2",
-		"core-js": "^3.6.5",
+		"@quasar/extras": "^1.9.13",
+		"axios": "^0.21.1",
+		"core-js": "^3.8.2",
 		"execa": "latest",
-		"moviedb-promise": "^3.0.3",
+		"moviedb-promise": "^3.1.6",
 		"opensubtitles-api": "^5.1.2",
-		"quasar": "^1.12.13",
-		"vue-class-component": "^7.2.5",
-		"vue-i18n": "^8.18.2",
-		"vue-property-decorator": "^9.0.0"
+		"quasar": "^1.15.0",
+		"vue-class-component": "^7.2.6",
+		"vue-i18n": "^8.22.4",
+		"vue-property-decorator": "^9.1.2"
 	},
 	"devDependencies": {
-		"@quasar/app": "^2.0.6",
+		"@quasar/app": "^2.1.14",
 		"@quasar/quasar-app-extension-dotenv": "^1.0.5",
-		"@types/node": "^14.0.24",
+		"@types/node": "^14.14.21",
 		"push-dir": "^0.4.1",
-		"workbox-webpack-plugin": "^5.0.0"
+		"workbox-webpack-plugin": "^6.0.2"
 	},
 	"browserslist": [
 		"ie >= 11",
