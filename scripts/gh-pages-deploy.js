@@ -4,7 +4,7 @@ const fs = require("fs");
 (async () => {
   try {
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
-    const folderName = fs.existsSync("dist/pwa") ? "dist/pwa" : "build";
+    const folderName = fs.existsSync("dist/spa") ? "dist/spa" : "build";
     await execa("git", ["--work-tree", folderName, "add", "--all"]);
     await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
     console.log("Pushing to gh-pages...");
