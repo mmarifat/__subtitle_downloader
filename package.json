@@ -6,8 +6,8 @@
 	"author": "mmarifat <mma.rifat66@gmail.com>",
 	"private": true,
 	"scripts": {
-		"dev": "quasar dev -m pwa",
-		"build": "quasar build -m pwa",
+		"dev": "quasar dev",
+		"build": "quasar build",
 		"ios": "quasar build -m capacitor -T ios",
 		"android": "quasar build -m capacitor -T android",
 		"deploy": "node scripts/gh-pages-deploy.js"
