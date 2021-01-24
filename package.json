@@ -10,7 +10,7 @@
 		"build": "quasar build -m pwa",
 		"ios": "quasar build -m capacitor -T ios",
 		"android": "quasar build -m capacitor -T android",
-		"deploy": "node scripts/gh-pages-pwa-deploy.js"
+		"deploy": "node scripts/gh-pages-deploy.js"
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.9.13",
