@@ -2,7 +2,7 @@
 	<section class="row justify-center">
 		<q-card class="q-mt-lg bg-transparent" flat>
 			<q-card-section class="text-center">
-				<q-img  position="0 0" contain src="/images/me.jpg" class="custom-image shadow-22" alt="msub"/>
+				<q-img  position="0 0" contain src="../../public/images/me.jpg" class="custom-image shadow-22" alt="msub"/>
 			</q-card-section>
 
 			<q-card-section class="q-pt-none text-center ">
