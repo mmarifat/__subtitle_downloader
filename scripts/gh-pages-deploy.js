@@ -3,15 +3,15 @@ const execa = require("execa");
 const fs = require("fs");
 (async () => {
   try {
-    await execa("git", ["checkout", "--orphan", "gh-pages-pwa"]);
+    await execa("git", ["checkout", "--orphan", "gh-pages"]);
     const folderName = fs.existsSync("dist/pwa") ? "dist/pwa" : "build";
     await execa("git", ["--work-tree", folderName, "add", "--all"]);
-    await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages-pwa"]);
-    console.log("Pushing to gh-pages-pwa...");
-    await execa("git", ["push", "origin", "HEAD:gh-pages-pwa", "--force"]);
+    await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
+    console.log("Pushing to gh-pages...");
+    await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
     await execa("rm", ["-r", folderName]);
     await execa("git", ["checkout", "-f", "master"]);
-    await execa("git", ["branch", "-D", "gh-pages-pwa"]);
+    await execa("git", ["branch", "-D", "gh-pages"]);
     console.log("Successfully deployed, check your settings");
   } catch (e) {
     // eslint-disable-next-line no-console
